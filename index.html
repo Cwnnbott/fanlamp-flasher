@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FanLamp Bridge — ESP32 Flasher</title>
+<style>
+  body { font-family: -apple-system, system-ui, sans-serif; max-width: 640px; margin: 40px auto; padding: 0 20px; line-height: 1.6; color: #1a1a1a; }
+  h1 { font-size: 1.6em; }
+  .step { background: #f5f5f5; border-radius: 12px; padding: 16px 20px; margin: 16px 0; }
+  .step b.n { display: inline-block; background: #111; color: #fff; width: 28px; height: 28px; border-radius: 50%; text-align: center; line-height: 28px; margin-right: 8px; }
+  code { background: #eee; padding: 2px 6px; border-radius: 6px; font-size: 0.9em; }
+  #flash-btn { margin: 8px 0; }
+  .note { font-size: 0.9em; color: #555; }
+</style>
+<script type="module" src="https://unpkg.com/esp-web-tools@10/dist/web/install-button.js"></script>
+</head>
+<body>
+<h1>🌀 FanLamp Bridge — flash your ESP32</h1>
+<p>This installs the FanLamp Bridge firmware, which lets Clover control your FanLamp Pro ceiling fan over the internet.</p>
+
+<div class="step"><b class="n">1</b> Plug the ESP32 into your PC with a <b>data</b> USB cable (some cables are charge-only).</div>
+
+<div class="step"><b class="n">2</b> Open this page in <b>Google Chrome</b> (WebSerial doesn't work in other browsers), then click install:<br>
+<esp-web-install-button id="flash-btn" manifest="./manifest.json"></esp-web-install-button><br>
+<span class="note">Pick the USB serial port (e.g. <code>USB-SERIAL</code> / <code>CP210x</code> / <code>CH340</code>). If nothing appears, try another cable or USB port.</span></div>
+
+<div class="step"><b class="n">3</b> After flashing, on your <b>phone</b> join the WiFi network <code>FanLampBridge</code>, and a setup page will pop up. Enter:
+<ul>
+  <li>Your home WiFi name + password — <b>must be the 2.4&nbsp;GHz network</b> (ESP32 can't see 5&nbsp;GHz)</li>
+  <li>MQTT server: <code>broker.hivemq.com</code>, port <code>1883</code> (already filled in)</li>
+</ul>
+Then hit <b>Save</b>. The ESP32 will reboot and connect.</div>
+
+<div class="step"><b class="n">4</b> Tell Clover it's online — she'll take it from there (learning your fan's ID, then a live test).</div>
+
+<p class="note">Built for Joseph · FanLamp Bridge v1 · firmware source on request</p>
+</body>
+</html>
